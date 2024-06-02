@@ -1,0 +1,24 @@
+use users;
+/* Select * */
+select *from users;
+
+/* insert data*/ 
+insert into users (first_name,last_name,email) values ("Ali","SALAH","alisalah@gmail.com"),("Samir","KAMMOUN","samirkammounh@gmail.com"),("Mohsen","AMIN","mohsenamin@gmail.com");
+/*query::01*/ 
+select * from users where email="alisalah@gmail.com";
+/*query::02*/ 
+select * from users where id=3;
+/*Update statement*/
+update users 
+set last_name="Panckakes"
+where id =3;
+/*Delete statement*/
+delete from users where id =2;
+
+/*Sorting*/
+select *from users order by first_name;
+/* Add More users*/
+insert into users (first_name,last_name,email) values ("Kamel","SASSI","kamelsassi@msn.com"),("Yacin","KAMEL","yacinkamel@yahoo.com");
+
+/*Sorting 2*/
+select *from users order by first_name desc;
