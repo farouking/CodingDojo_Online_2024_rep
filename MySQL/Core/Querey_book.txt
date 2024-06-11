@@ -1,0 +1,83 @@
+/*specify the datase that we will to use */
+USE books3_schema ;
+
+/*Slect from users */
+SELECT *FROM books3_schema.users;
+/* Drop USER*/
+/*DROP TABLE books3_schema.users;*/
+
+/*Creates 5 differents users */
+INSERT INTO books3_schema.users (first_name,last_name) VALUES ("James" ,"Amsden"), ("Emily" ,"Dixon"), 
+("Tehodore","Desteovsky"),  ("William", "Shpiro"), ("Lao" ,"Xio");
+/*Delete rows*/
+DELETE FROM books3_schema.users WHERE books3_schema.users.id = 6 
+OR books3_schema.users.id = 7 OR books3_schema.users.id = 8
+OR books3_schema.users.id = 9 OR books3_schema.users.id =10 ;
+/*Slect from users */
+SELECT *FROM books3_schema.books;
+
+/*Creates 5 differents Books */
+INSERT INTO books3_schema.books (title,num_of_pages) VALUES ("C Sharp",500), ("Java",400), 
+("Python",250),("PHP",550),("Ruby",100);
+
+/*Change the name of Csharp UPDATE table_name SET column1 = value1, column2 = value2, ...
+WHERE condition;*/
+
+update books3_schema.books SET books3_schema.books.title=("C#") WHERE books3_schema.books.id = 1;
+
+/* chanege the first name of the fourth user to Bill*/
+UPDATE books3_schema.users SET books3_schema.users.first_name=("Bill") 
+WHERE books3_schema.users.id = 4;
+
+/**/
+SELECT * FROM books3_schema.register;
+
+/*the user 1 has the two first books as favourite */
+
+INSERT INTO books3_schema.register (books3_schema.register.user_id,books3_schema.register.book_id) 
+VALUES (1,1),(1,2);
+
+/*the user 2 has the three first books as favourite */
+
+INSERT INTO books3_schema.register (books3_schema.register.user_id,books3_schema.register.book_id) 
+VALUES (2,1),(2,2),(2,3);
+
+/*the user 3 has the four first books as favourite */
+
+INSERT INTO books3_schema.register (books3_schema.register.user_id,books3_schema.register.book_id) 
+VALUES (3,1),(3,2),(3,3),(3,4);
+
+/*the user 4 has All books as favourite */
+
+INSERT INTO books3_schema.register (books3_schema.register.user_id,books3_schema.register.book_id) 
+VALUES (4,1),(4,2),(4,3),(4,4),(4,5);
+
+/*retrive the users that prefer the 3 rd book */
+
+SELECT users.first_name, users.last_name FROM books3_schema.users
+JOIN books3_schema.register on users.id = register.user_id
+JOIN books on register.book_id = books.id
+WHERE books.id = 3;
+
+-- Query: Remove the first user of the 3rd book's favorites
+DELETE from register where book_id = 3 AND user_id = 1;
+
+/*the user 5 has as favourite book two . */
+
+INSERT INTO books3_schema.register (books3_schema.register.user_id,books3_schema.register.book_id) 
+VALUES (5,2);
+
+/**/
+select * FROM books3_schema.register;
+
+/*user 03 favourite books */
+
+SELECT books3_schema.books.title from books3_schema.books
+JOIN books3_schema.register as faves on faves.book_id = books.id
+WHERE faves.user_id = 3;
+
+/*All usersthat their favourite book is book5 */
+SELECT users.first_name, users.last_name FROM books3_schema.users
+JOIN books3_schema.register on users.id = register.user_id
+JOIN books on register.book_id = books.id
+WHERE books.id = 5;
